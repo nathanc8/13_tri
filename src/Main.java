@@ -1,27 +1,31 @@
-import java.lang.reflect.Array;
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         int[] arrayToSort = {4, 3, 7, 2, 9, 1, 8};
 //        bubbleSort(arrayToSort);
 //        System.out.println(Arrays.toString(arrayToSort));
-        something(arrayToSort);
+        quicksort(arrayToSort);
 //        System.out.println(Arrays.toString(arrayToSort));
     }
 
-    public static int[] something(int[] array) {
+    public static int[] quicksort(int[] array) {
         int pivot = array[0];
-        int currentIndex = 0;
+        int higherNumberIndex = 0;
         int temp = 0;
         for (int i = 1; i < array.length; i++) {
-            if (pivot < array[i]) {
-                //inversion des trucs
-                currentIndex++;
+            if (array[i] <= pivot) {
+                //inversion des trucs &
+                higherNumberIndex++;
                 temp = array[i];
-                array[i] = array[currentIndex];
-                array[currentIndex] = temp;
+                array[i] = array[higherNumberIndex];
+                array[higherNumberIndex] = temp;
             }
+            List<Integer> infList = new ArrayList<Integer>();
+            List<Integer> supList = new ArrayList<Integer>();
         }
         return array;
     }
@@ -38,5 +42,4 @@ public class Main {
         }
         return array;
     }
-
 }
