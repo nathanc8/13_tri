@@ -1,33 +1,42 @@
-import java.sql.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        int[] arrayToSort = {4, 3, 7, 2, 9, 1, 8};
+        int[] arrayToSort = {429, 74, 311, 420, 212, 102, 293, 487, 10, 410, 395, 308, 347, 130, 407, 120, 122, 378, 251, 458, 278, 388, 326, 65, 163, 231, 299, 432, 48, 364, 286, 181, 456, 126, 271, 75, 249, 78, 25, 196, 81, 304, 373, 7, 147, 284, 216, 116, 110, 164, 19, 54, 70, 5, 4, 259, 267, 117, 489, 90, 390, 442, 439, 414, 151, 68, 194, 156, 455, 255, 18, 385, 123, 157, 56, 37, 419, 368, 27, 468, 58, 387, 335, 350, 462, 15, 67, 258, 322, 62, 412, 29, 401, 319, 158, 246, 449, 128, 55, 170, 314, 93, 265, 300, 185, 173, 343, 225, 433, 411, 182, 297, 204, 79, 105, 352, 313, 189, 478, 312, 399, 497, 193, 101, 203, 176, 83, 192, 285, 413, 274, 302, 190, 188, 318, 345, 49, 179, 217, 139, 209, 8, 333, 107, 20, 66, 207, 195, 281, 288, 23, 261, 167, 440, 341, 35, 150, 415, 169, 162, 206, 287, 337, 400, 328, 375, 144, 406, 363, 237, 485, 236, 262, 316, 100, 392, 340, 103, 447, 127, 366, 423, 202, 53, 381, 129, 277, 353, 60, 435, 135, 124, 148, 438, 256, 146, 47, 26, 240, 226, 220, 242, 197, 132, 111, 403, 424, 199, 16, 243, 493, 428, 372, 235, 40, 77, 89, 405, 72, 114, 149, 365, 113, 228, 280, 386, 362, 471, 168, 434, 268, 477, 396, 219, 248, 417, 97, 264, 131, 377, 376, 92, 422, 466, 479, 346, 213, 11, 494, 245, 140, 342, 221, 119, 481, 354, 143, 28, 59, 63, 32, 153, 499, 254, 34, 361, 301, 210, 445, 165, 137, 13, 486, 200, 244, 233, 416, 315, 279, 339, 208, 215, 446, 463, 76, 426, 252, 296, 380, 184, 298, 371, 142, 332, 283, 329, 232, 80, 152, 44, 273, 310, 46, 389, 223, 382, 334, 484, 496, 57, 134, 125, 229, 172, 250, 14, 266, 118, 171, 96, 99, 39, 22, 290, 6, 159, 480, 136, 393, 87, 160, 52, 84, 437, 218, 421, 323, 12, 230, 238, 257, 359, 331, 263, 294, 276, 465, 383, 305, 370, 166, 483, 178, 198, 384, 82, 430, 50, 38, 357, 145, 108, 95, 21, 309, 397, 247, 470, 459, 295, 24, 444, 306, 452, 404, 448, 86, 402, 472, 253, 454, 282, 492, 441, 474, 205, 418, 73, 41, 2, 348, 358, 476, 241, 469, 317, 71, 227, 106, 260, 211, 398, 69, 338, 330, 460, 457, 133, 222, 191, 355, 3, 495, 36, 269, 270, 473, 94, 461, 425, 161, 498, 30, 183, 239, 303, 1, 31, 138, 224, 121, 272, 174, 344, 45, 51, 9, 475, 325, 491, 327, 17, 488, 324, 289, 88, 104, 64, 367, 43, 321, 356, 349, 467, 379, 369, 234, 443, 187, 436, 112, 307, 482, 490, 175, 109, 275, 154, 453, 91, 98, 464, 180, 451, 320, 186, 360, 141, 450, 351, 431, 409, 291, 394, 155, 336, 500, 177, 374, 85, 214, 391, 115, 42, 427, 33, 61, 292, 201, 408};
 //        bubbleSort(arrayToSort);
 //        System.out.println(Arrays.toString(arrayToSort));
-        quicksort(arrayToSort);
+//        partition(arrayToSort, 0, arrayToSort.length - 1);
 //        System.out.println(Arrays.toString(arrayToSort));
+        quicksort(arrayToSort, 0, arrayToSort.length - 1);
+        System.out.println("Tableau trié :");
+        for (int i : arrayToSort) {
+            System.out.print(i + " ");
+        }
     }
 
-    public static int[] quicksort(int[] array) {
-        int pivot = array[0];
-        int higherNumberIndex = 0;
-        int temp = 0;
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] <= pivot) {
-                //inversion des trucs &
-                higherNumberIndex++;
-                temp = array[i];
-                array[i] = array[higherNumberIndex];
-                array[higherNumberIndex] = temp;
-            }
-            List<Integer> infList = new ArrayList<Integer>();
-            List<Integer> supList = new ArrayList<Integer>();
+    public static void quicksort(int[] array, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(array, low, high);
+            quicksort(array, low, pivotIndex - 1);
+            quicksort(array, pivotIndex + 1, high);
         }
-        return array;
+    }
+
+    public static int partition(int[] array, int low, int high) {
+        int pivot = array[high];
+        int lowerNumberIndex = (low - 1);
+        for (int i = low; i < high; i++) {
+            if (array[i] < pivot) {
+                lowerNumberIndex++;
+                int temp = array[lowerNumberIndex];
+                array[lowerNumberIndex] = array[i];
+                array[i] = temp;
+            }
+        }
+        int temp = array[lowerNumberIndex + 1];
+        array[lowerNumberIndex + 1] = array[high];
+        array[high] = temp;
+        return lowerNumberIndex + 1;
     }
 
     public static int[] bubbleSort(int[] array) {
